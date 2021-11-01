@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CenterAggregate\Dtos\CenterVariable\**" />
+    <Compile Remove="CenterAggregate\Dtos\Activity\**" />
+    <EmbeddedResource Remove="CenterAggregate\Dtos\Application\**" />
+    <EmbeddedResource Remove="CenterAggregate\Dtos\CenterApplication\**" />
+    <None Remove="CenterAggregate\Dtos\Application\**" />
+    <None Remove="CenterAggregate\Dtos\CenterApplication\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CenterAggregate\Dtos\CenterCode\" />
+    <Folder Include="SharedKernel\ValueObjects\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Center.Common\Center.Common.csproj" />
+  </ItemGroup>
+
+</Project>

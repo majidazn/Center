@@ -1,0 +1,95 @@
+/* in-flight clone */
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  //filter: alpha(opacity=80);
+  //pointer-events: none;
+  margin: 10px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease-in-out;
+  cursor: grabbing !important;
+  cursor: -moz-grabbing !important;
+  cursor: -webkit-grabbing !important;
+  text-align: right;
+  direction: rtl;
+  float: none;
+
+  .option {
+    display: none;
+  }
+}
+/* high-performance display:none; helper */
+.gu-hide {
+  left: -9999px !important;
+}
+/* added to mirrorContainer (default = body) while dragging */
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+/* added to the source element while its mirror is dragged */
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+
+.draggable-tr {
+  text-align: right;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.gu-transit {
+  // text-align: right;
+  //direction:rtl;
+  // float:none;
+  background-color: bisque;
+}
+
+.pointer {
+  cursor: pointer !important;
+}
+/* 
+  * note that styling gu-mirror directly is a bad practice because it's too generic. 
+  * you're better off giving the draggable elements a unique class and styling that directly! 
+  */
+
+.black-overlay {
+  position: fixed;
+}
+
+#fileUploader {
+  width: 0;
+}
+
+.delete-icon {
+  position: relative;
+  top: -13px;
+}
+
+.preview-icon {
+  margin-right: 5px;
+  width: auto;
+  height: 60px;
+}
+
+.button-container {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row-reverse;
+}
+.k-animation-container{
+  text-align: right !important;
+  direction: rtl !important;
+}
+td {
+  vertical-align: middle;
+}

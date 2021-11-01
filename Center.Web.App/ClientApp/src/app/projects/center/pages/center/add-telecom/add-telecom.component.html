@@ -1,0 +1,65 @@
+<div class="modal-content">
+  <div cdkDragHandle cdkDrag cdkDragRootElement=".cdk-overlay-pane" class="modal-header">
+    {{dataItem.title}}
+    <button [mat-dialog-close]="true" class="close" aria-label="Close" type="button"><span class="ng-tns-c11-3" aria-hidden="true">×</span></button>
+  </div>
+  <div class="modal-body">
+    <div class="card">
+      <div class="card-block">
+        <form class="k-form" [formGroup]="telecomForm" (submit)="saveTelecom()">
+
+          <div class="row">
+
+            <div class="col-md-6 standard-padding">
+              <kendo-combobox [data]="telKindlistItems"
+                              [textField]="'text'"
+                              [valueField]="'value'"
+                              [filterable]="true"
+                              id="type"
+                              formControlName="type"
+                              [valuePrimitive]="true"
+                              (valueChange)="comboTypeChange($event)"
+                              [value]="selectedTelKind"
+                              [placeholder]="'نوع تلفن'"
+                              title="نوع تلفن"
+                              class="form-control">
+              </kendo-combobox>
+              <app-control-messages [_control]="telecomForm.controls.type"></app-control-messages>
+            </div>
+
+            <div class="col-md-6 standard-padding" *ngIf="telecomForm.value.type==2">
+              <mat-form-field class="example-full-width ltr mobileNumber-container form-control">
+                <input type="text" matInput #mobileNo formControlName="mobileNo" placeholder="09xxxxxxxxx" title="شماره موبایل" style="direction:ltr">
+                <app-control-messages [_control]="telecomForm.controls.mobileNo"></app-control-messages>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 standard-padding" *ngIf="telecomForm.value.type==1">
+              <mat-form-field class="example-full-width form-control">
+                <input type="text" matInput #areaCode placeholder="پیش شماره" formControlName="areaCode" title="پیش شماره"  style="direction:ltr">
+                <app-control-messages [_control]="telecomForm.controls.areaCode"></app-control-messages>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 standard-padding" *ngIf="telecomForm.value.type==1">
+              <mat-form-field class="example-full-width form-control">
+                <input type="text" matInput #tell placeholder="شماره تلفن" formControlName="tellNo" title="شماره تلفن"  style="direction:ltr">
+                <app-control-messages [_control]="telecomForm.controls.tellNo"></app-control-messages>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 standard-padding" *ngIf="telecomForm.value.type==1">
+              <input kendoTextBox class="k-textbox form-control" placeholder="تلفن داخلی" title="تلفن داخلی" formControlName="section" type="number"  style="direction:ltr" />
+            </div>
+            <div class="col-md-12 standard-padding">
+              <textarea class="form-control-textarea" placeholder="توضیحات" title="توضیحات" formControlName="comment" rows="2"></textarea>
+            </div>
+            <div class="col-md-12 standard-padding text-left">
+              <button kendoButton [primary]="true" type="submit" [disabled]="!telecomForm.valid" class="btn-modal save">
+                <i class="fa fa-save margin_L"></i>
+                افزودن
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

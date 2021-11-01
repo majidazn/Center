@@ -1,0 +1,218 @@
+
+<ul class="nav nav-pills tab-header">
+  <li><a data-toggle="pill" href="#searchTab" id="searchSubProjectTab" class="active">جستجو</a></li>
+  <li><a data-toggle="pill" href="#addSubProject" id="addSubProjectTab">ثبت برنامه</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="searchTab" class="tab-pane fade in active show">
+    <div class="card">
+      <form [formGroup]="searchForm">
+        <div class="row margin-0">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 standard-padding">
+            <kendo-combobox [data]="activityGroups"
+                            [loading]="activityGroups==null"
+                            [textField]="'name'"
+                            [valueField]="'centerVariableId'"
+                            [filterable]="true"
+                            id="activityGroup"
+                            formControlName="activityGroup"
+                            [valuePrimitive]="true"
+                            [placeholder]="'گروه اصلی برنامه ها'"
+                            title="گروه اصلی برنامه ها"
+                            [value]="selectedActivityGroup"
+                            (valueChange)="onchangeActivityGroup($event)"
+                            class="form-control margin-0">
+            </kendo-combobox>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 standard-padding text-left">
+            <a class="btn btn-main ribbon-button" (click)="searchApplication()" (enter)="searchApplication()" title="جستجو">
+              <img src="../../../../../assets/Images/Icons/magnifier.png" />
+            </a>
+            <a class="btn btn-main btn-reset ribbon-button" title="خالی کردن" (click)="resetSearchForm()">
+              <img src="../../../../../assets/Images/Icons/refresh.png" style="top: -4px;" />
+            </a>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <div id="addSubProject" class="tab-pane fade">
+    <div class="card mb-3" id="addSubProject">
+      <form [formGroup]="addApplicationForm" (submit)="saveApplication()" (ctrlS)="saveApplication()">
+        <div class="row margin-0">
+          <div class="col-md-10">
+            <div class="row margin-0">
+              <div class="col-md-3 standard-padding">
+                <kendo-combobox [data]="activityGroups"
+                                [loading]="activityGroups==null"
+                                [textField]="'name'"
+                                [valueField]="'centerVariableId'"
+                                [filterable]="true"
+                                id="activityGroup"
+                                formControlName="activityGroup"
+                                [valuePrimitive]="true"
+                                [placeholder]="'گروه اصلی برنامه ها'"
+                                title="گروه اصلی برنامه ها"
+                                [value]="selectedActivityGroup"
+                                (valueChange)="onchangeActivityGroup($event)"
+                                class="form-control margin-0">
+                </kendo-combobox>
+                <app-control-messages [_control]="addApplicationForm.controls.activityGroup"></app-control-messages>
+              </div>
+              <div class="col-md-3 standard-padding">
+                <input class="k-textbox form-control" placeholder="نام برنامه" title="نام برنامه" formControlName="applicationName" id="applicationName" />
+                <app-control-messages [_control]="addApplicationForm.controls.applicationName"></app-control-messages>
+              </div>
+              <div class="col-md-3 standard-padding">
+                <input class="k-textbox form-control" placeholder="نام انگلیسی برنامه" title="نام انگلیسی برنامه" formControlName="applicationEName" id="applicationEName" />
+                <app-control-messages [_control]="addApplicationForm.controls.applicationEName"></app-control-messages>
+              </div>
+              <div class="col-md-2 standard-padding">
+                <kendo-combobox [data]="internalUsage"
+                                [loading]="internalUsage==null"
+                                [textField]="'name'"
+                                [valueField]="'centerVariableId'"
+                                [filterable]="true"
+                                id="activityGroup"
+                                formControlName="internalUsage"
+                                [valuePrimitive]="true"
+                                [placeholder]="'نحوه استفاده'"
+                                title="نحوه استفاده"
+                                class="form-control">
+                </kendo-combobox>
+                <app-control-messages [_control]="addApplicationForm.controls.activityGroup"></app-control-messages>
+              </div>
+              <div class="col-md-1 standard-padding">
+                <input class="k-textbox form-control" type="number" placeholder="کد" title="کد" formControlName="code" id="code" />
+                <app-control-messages [_control]="addApplicationForm.controls.code"></app-control-messages>
+              </div>
+            </div>
+            <div class="row margin-0" *ngIf="isCloudApp">
+              <div class="col-md-3 standard-padding">
+                <input class="k-textbox form-control" placeholder="آدرس" title="آدرس" formControlName="address" id="address" />
+                <app-control-messages [_control]="addApplicationForm.controls.address"></app-control-messages>
+              </div>
+              <div class="col-md-3 standard-padding">
+                <input class="k-textbox form-control" placeholder="کلید میانبر" title="کلید میانبر" formControlName="shortKey" id="shortKey" />
+                <app-control-messages [_control]="addApplicationForm.controls.shortKey"></app-control-messages>
+              </div>
+              <div class="col-md-6 standard-padding">
+                <ngfFormData [files]="files"
+                             postName="file"
+                             [(FormData)]="sendableFormData"></ngfFormData>
+
+                <ngfUploadStatus [(percent)]="progress"
+                                 [httpEvent]="httpEvent"></ngfUploadStatus>
+                <input ngfSelect
+                       #fileUploader
+                       id="fileUploader"
+                       type="file"
+                       formControlName="icon"
+                       [(files)]="logoImage"
+                       [accept]="accept"
+                       [maxSize]="actMaxSize"
+                       style="opacity:0"
+                       [(lastInvalids)]="lastInvalids"
+                       (filesChange)="imageLogoChanged($event)" />
+                <img src="../../../../../assets/Images/addLogo.png" class="float-right" title="افزودن لوگو" (click)="fileUploader.click()" />
+                <img *ngIf="logoImageBase64" src="../../../../../assets/Images/deleteLogo.png" (click)="removeLogoImage()" title="حذف لوگو" class="cursor-pointer delete-icon" />
+                <img *ngIf="logoImageBase64" [src]="logoImageBase64WithDataImage" class="preview-icon" />
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-2 standard-padding button-container">
+            <a class="btn btn-main btn-reset ribbon-button d-inline-block float-left" (click)="resetForm()" title="خالی کردن">
+              <img src="../../../../../assets/Images/Icons/refresh.png" />
+            </a>
+            <button [disabled]="!addApplicationForm.valid" type="submit" class="btn btn-main ribbon-button d-inline-block float-left" title="ذخیره" [hasPermission]="[Permissions.CreateCenterVariable,Permissions.EditCenterVariable] | addFullAccessUsers">
+              <img src="../../../../../assets/Images/Icons/save-file-option.png" />
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+  </div>
+
+</div>
+
+<div class="row margin-top-10 margin-0 headColor">
+  <div class="k-widget k-grid borderTop-pane">
+    <div class="k-grid-aria-root">
+      <div class="k-grid-header ng-star-inserted">
+        <div class="k-grid-header-wrap">
+          <table class="table table-condensed k-grid-table non-kendo-grid subProjectList" >
+
+            <thead>
+              <tr>
+                <th hidden>ceId</th>
+                <th hidden>parentId</th>
+                <th hidden>sort</th>
+                <th width="50px">کد</th>
+                <th width="70px" *ngIf="isCloudApp">آیکن برنامه</th>
+                <th>نام برنامه</th>
+                <th>نام انگلیسی</th>
+                <th width="80px" *ngIf="isCloudApp">نحوه استفاده</th>
+                <th *ngIf="!isCloudApp">نحوه استفاده</th>
+                <th *ngIf="isCloudApp">آدرس برنامه</th>
+                <th width="100px" *ngIf="isCloudApp">کلید میانبر</th>
+                <th width="120px" class="text-center">عملیات</th>
+              </tr>
+            </thead>
+            <tbody dragula="SPILL" [(dragulaModel)]="dataSource" class="sublevel">
+              <tr class="noDataRow" *ngIf="showNoRecord">
+                <td colspan="5" *ngIf="!isCloudApp">
+                  رکوردی برای نمایش وجود ندارد
+                </td>
+                <td colspan="8" *ngIf="isCloudApp">
+                  رکوردی برای نمایش وجود ندارد
+                </td>
+              </tr>
+              <tr *ngFor="let item of dataSource" class="draggable-tr k-row ng-star-inserted hasDataRow" (dblclick)="edit(item)">
+
+                <td hidden>
+                  {{item.centerVariableId}}
+                </td>
+                <td hidden>
+                  {{item.parentId}}
+                </td>
+                <td hidden>
+                  {{item.sort}}
+                </td>
+                <td>
+                  {{item.code}}
+                </td>
+                <td *ngIf="isCloudApp">
+                  <img *ngIf="item.icon" [src]="item.iconbase64" width="40px" />
+                </td>
+                <td>
+                  {{item.name}}
+                </td>
+                <td>
+                  {{item.enName}}
+                </td>
+                <td>
+                  {{item.internalUsageString}}
+                </td>
+                <td *ngIf="isCloudApp">
+                  {{item.address}}
+                </td>
+                <td *ngIf="isCloudApp">
+                  {{item.shortKey}}
+                </td>
+                <td class="option">
+                  <a class=" fa fa-trash icofont icofont-bin btn-grid" title="حذف" (click)="onDeleteCenterVariable(item)" [hasPermission]="[Permissions.RemoveCenterVariable] | addFullAccessUsers"> </a>
+                  <a class="fa fa-pencil icofont icofont-ui-edit btn-grid" title="ویرایش" (click)="edit(item)" [hasPermission]="[Permissions.EditCenterVariable] | addFullAccessUsers"> </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

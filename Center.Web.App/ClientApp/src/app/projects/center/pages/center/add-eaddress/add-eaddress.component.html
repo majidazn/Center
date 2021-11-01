@@ -1,0 +1,49 @@
+<div class="modal-content">
+  <div cdkDragHandle cdkDrag cdkDragRootElement=".cdk-overlay-pane" class="modal-header">
+    {{dataItem.title}}
+    <button [mat-dialog-close]="true" class="close" aria-label="Close" type="button"><span class="ng-tns-c11-3" aria-hidden="true">×</span></button>
+  </div>
+  <div class="modal-body">
+    <div class="card">
+      <div class="card-block">
+        <form class="k-form" [formGroup]="eAddressForm" (submit)="saveEaddress()">
+
+          <div class="row margin-0">
+
+            <div class="col-md-6 standard-padding">
+
+              <label class="k-form-field">
+                <kendo-combobox [data]="Etypes"
+                                [textField]="'text'"
+                                [valueField]="'value'"
+                                [filterable]="true"
+                                [valuePrimitive]="true"
+                                id="type"
+                                [value]="selectedEtype"
+                                (valueChange)="comboETypeChange($event)"
+                                [placeholder]="'نوع رسانه'"
+                                title="نوع رسانه"
+                                class="form-control">
+
+                </kendo-combobox>
+                <app-control-messages [_control]="eAddressForm.controls.EType"></app-control-messages>
+              </label>
+
+            </div>
+
+            <div class="col-md-6 standard-padding">
+              <input class="k-textbox form-control" placeholder="آدرس" title="آدرس" formControlName="EAddress" id="EAddress" />
+              <app-control-messages [_control]="eAddressForm.controls.EAddress"></app-control-messages>
+            </div>
+
+            <div class="col-md-12 standard-padding text-left">
+              <button kendoButton [primary]="true" type="submit" [disabled]="!eAddressForm.valid" class="btn-modal save margin-top-5"> <i class="fa fa-save margin_L"></i> افزودن </button>
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

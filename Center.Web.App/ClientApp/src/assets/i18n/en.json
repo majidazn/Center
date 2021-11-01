@@ -1,0 +1,27 @@
+{
+
+  "save": "save",
+  "cancel": "cancel",
+
+
+  "DemographicInformationGrid": {
+
+    "FirstName": "نام",
+    "LastName": "نام خانوادگی"
+
+  },
+
+
+
+  "HOME": {
+    "TITLE": "title",
+    "SELECT": "select"
+  },
+
+  "lab": {
+    "page1": {
+
+    }
+
+  }
+}

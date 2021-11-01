@@ -1,0 +1,17 @@
+
+<div class="">
+  <div class="notAccess">
+    <div class="container pl-5 pr-5 containerImg">
+      <img src="../../../../assets/Images/401-gif.gif" alt="Italian Trulli" class="img-notFound">
+    </div>
+    <p class="text-center pr-2 mb-5" *ngIf="!isTokenInvalid">
+      مجوز شما نامعتبر است لطفا مجددا وارد شوید
+    </p>
+    <p class="text-center pr-2 mb-5" *ngIf="isTokenInvalid">
+      لطفا از طریق صفحه اصلی پرتال با استفاده از نام کاربری و رمز عبور خود وارد شوید
+    </p>
+    <button class="btn " id="returnBtn" *ngIf="!isTokenInvalid">
+      <a [href]="landingUrl"> صفحه ورود به پرتال </a>
+    </button>
+  </div>
+</div>

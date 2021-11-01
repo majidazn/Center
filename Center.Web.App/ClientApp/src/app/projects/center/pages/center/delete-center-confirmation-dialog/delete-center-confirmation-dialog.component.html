@@ -1,0 +1,18 @@
+<div class="modal-content">
+  <div [draggable] dragTarget=".mat-dialog-container" class="modal-header">
+    {{dataItem.title}}
+    <button [mat-dialog-close]="true" class="close" aria-label="Close" type="button"><span class="ng-tns-c11-3" aria-hidden="true">×</span></button>
+
+  </div>
+  <div class="modal-body">
+    <div class="card">
+      <p>
+        آیا از حذف این رکورد اطمینان دارید؟
+      </p>
+      <div class="float-left">
+        <button type="button" class="btn-modal save k-button" (click)="deleteRecord()"> بله </button>
+        <button type="button" class="btn-modal cancel k-button" (click)="closeDialog()"> خیر </button>
+      </div>
+    </div>
+    </div>
+</div>

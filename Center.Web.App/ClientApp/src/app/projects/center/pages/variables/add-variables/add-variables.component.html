@@ -1,0 +1,79 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 standard-padding">
+
+
+      <form class="k-form no-padding" [formGroup]="centerVariableForm" (submit)="saveCenterVariable()">
+        <!--ribbon-top-->
+        <div class="ribbon-section">
+          <div class="container-fluid">
+            <button kendoButton [primary]="true" type="submit" [disabled]="!centerVariableForm.valid" class="btn btn-main btn-save ribbon-button" title="ذخیره">
+              <img src="../../../../../assets/Images/Icons/save-file-option.png" />
+            </button>
+            <button kendoButton [primary]="true" type="button" class="btn btn-main btn-reset ribbon-button" title="خالی کردن" (click)="clearForm()">
+              <img src="../../../../../assets/Images/Icons/refresh.png" style="top: -4px;" />
+            </button>
+          </div>
+        </div>
+        <!--/end ribbon-top-->
+        <div class="card mt-60">
+          <div class="card-header">ثبت متغیرهای پایه</div>
+          <div class="card-body">
+            <div class="row margin-0">
+              <div class="col-lg-4 col-md-4 standard-padding">
+                <kendo-combobox [data]="centerVariableParentListItem"
+                                [loading]="centerVariableParentListItem==null"
+                                [textField]="'name'"
+                                [valueField]="'centerVariableId'"
+                                [filterable]="true"
+                                formControlName="ParentId"
+                                disabled
+                                [value]="selectedParentCenterVariable"
+                                (valueChange)="onchangeparentCenterVariable($event)"
+                                [placeholder]="'نام گروه متغیر'"
+                                [valuePrimitive]="true"
+                                title="نام گروه متغیر"
+                                class="form-control">
+                </kendo-combobox>
+              </div>
+              <input type="hidden" formControlName="CentervariableId" />
+              <div class="col-lg-4 col-md-4 standard-padding">
+                <input class="k-textbox form-control" placeholder="نام " title="نام" formControlName="Name" />
+                <app-control-messages [_control]="centerVariableForm.controls.Name"></app-control-messages>
+              </div>
+              <div class="col-lg-4 col-md-4 standard-padding">
+                <input class="k-textbox form-control" placeholder="نام انگلیسی" title="نام انگلیسی" formControlName="EName" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="row margin-top-10 margin-0 headColor">
+        <kendo-grid [data]="gVariablesView"
+                    [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+                    [sortable]="true"
+                    [pageable]="true"
+                    [reorderable]="true"
+                    [loading]="gVariablesViewLoading"
+                    (dataStateChange)="dataStateChange($event)"
+                    class="borderTop-pane">
+          <kendo-grid-column field="centerVariableId" title="id" [hidden]="true"></kendo-grid-column>
+          <kendo-grid-column field="name" title="نام" dir="rtl"></kendo-grid-column>
+          <kendo-grid-column field="enName" title="نام انگلیسی" dir="rtl"></kendo-grid-column>
+          <div *kendoGridDetailTemplate="let dataItem" class="sublevel">
+            <app-variable-sub-grid [centerVariableId]="dataItem.centerVariableId" [centerVariableName]="dataItem.name" [parentInstance]="this"></app-variable-sub-grid>
+          </div>
+          <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
+            <app-kendo-grid-pagination></app-kendo-grid-pagination>
+          </ng-template>
+        </kendo-grid>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

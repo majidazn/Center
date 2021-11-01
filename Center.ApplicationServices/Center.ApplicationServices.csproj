@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Activity\Commands\" />
+    <Folder Include="Activity\DomainServices\" />
+    <Folder Include="Activity\Queries\" />
+    <Folder Include="CenterVariable\Events\" />
+    <Folder Include="Center\Events\" />
+    <Folder Include="SharedKernel\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Center.Domain\Center.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

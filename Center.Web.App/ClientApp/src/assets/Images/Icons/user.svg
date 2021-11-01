@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="41.114" height="41.114" viewBox="0 0 41.114 41.114">
+    <defs>
+        <style>
+            .cls-1{fill:#fff}.cls-2{filter:url(#Path_124)}
+        </style>
+        <filter id="Path_124" width="41.114" height="41.114" x="0" y="0" filterUnits="userSpaceOnUse">
+            <feOffset dx="1" dy="4"/>
+            <feGaussianBlur result="blur" stdDeviation="3"/>
+            <feFlood flood-opacity=".329"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g id="user" transform="translate(8 5)">
+        <g id="Group_465" class="cls-2" data-name="Group 465" transform="translate(-8 -5)">
+            <path id="Path_124-2" d="M19.729 14.942a11.513 11.513 0 0 0-4.392-2.755 6.681 6.681 0 1 0-7.561 0A11.575 11.575 0 0 0 0 23.114h1.806a9.751 9.751 0 0 1 19.5 0h1.806a11.482 11.482 0 0 0-3.383-8.172zm-8.172-3.385a4.876 4.876 0 1 1 4.876-4.876 4.881 4.881 0 0 1-4.876 4.876z" class="cls-1" data-name="Path 124" transform="translate(8 5)"/>
+        </g>
+    </g>
+</svg>

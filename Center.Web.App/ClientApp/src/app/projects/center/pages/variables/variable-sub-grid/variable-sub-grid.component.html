@@ -1,0 +1,32 @@
+<kendo-grid [data]="viewSubLevel1"
+            [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+            [sortable]="true"
+            [pageable]="true"
+            [reorderable]="true"
+            (dataStateChange)="dataStateChange($event)"
+            [loading]="viewSubLevel1Loading">
+
+
+  <ng-template kendoGridToolbarTemplate let-dataItem>
+    <a (click)="OnAddNewCenterVariableClicked()" title="افزودن متغیر جدید به این گروه" class="icofont icofont-plus-circle grid-header-icon">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      افزودن متغیر جدید به این گروه
+    </a>
+  </ng-template>
+  <kendo-grid-column field="name" title="نام"></kendo-grid-column>
+  <kendo-grid-column field="enName" title="نام انگلیسی"></kendo-grid-column>
+
+  <kendo-grid-column title="" width="120">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <a (click)="onEditCenterVariable(dataItem)">
+        <i class="fa fa-pencil icofont icofont-ui-edit btn-grid" aria-hidden="true" title="ویرایش"></i>
+      </a>
+      <a (click)="onDeleteCenterVariable(dataItem)">
+        <i class="fa fa-trash icofont icofont-bin btn-grid" aria-hidden="true" title="حذف"></i>
+      </a>
+    </ng-template>
+  </kendo-grid-column>
+  <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
+    <app-kendo-grid-pagination></app-kendo-grid-pagination>
+  </ng-template>
+</kendo-grid>

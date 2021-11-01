@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 standard-padding">
+      <div class="ribbon-section">
+        <div class="container-fluid">
+          <button kendoButton type="button" (click)="save()" class="btn btn-main btn-save ribbon-button" title="ذخیره">
+
+            <img src="../../../../../assets/Images/Icons/save-file-option.png" />
+            <!--<span class="icofont icofont-save"></span>-->
+          </button>
+        </div>
+      </div>
+      <form [formGroup]="formAccess">
+        <div class="card mt-60">
+          <div class="card-header">
+            تعیین سطح دسترسی
+          </div>
+
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-lg-4 col-sm-6 col-12">
+                <kendo-combobox [data]="RoleList"
+                                [loading]="RoleList==null"
+                                [textField]="'text'"
+                                [valueField]="'value'"
+                                [filterable]="true"
+                                id="mainActivityId"
+                                [valuePrimitive]="true"
+                                (valueChange)="onchangeRole($event)"
+                                [value]="selectedRole"
+                                [placeholder]="'انتخاب نقش'"
+                                formControlName="Role"
+                                (filterChange)="handleFilterRoleList($event)"
+                                class="form-control">
+                  <!--formControlName="ActivityValue"-->
+                </kendo-combobox>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accessdiv">
+          <div *ngFor="let controller of controllers">
+            <div>
+              <!--*ngIf="controller.disabled==false"-->
+
+              <div class="card mt-2">
+                <div class="card-header">
+                  {{controller.controllerDisplayName}}
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div *ngFor="let mvcAction of controller.mvcActions" class="col-md-4 col-sm-6 group-checkbox">
+                      <input type="checkbox" id="{{mvcAction.actionId}}" [checked]="isChecked(mvcAction.actionIdNonSecure)" class="checkbox-style" />
+                      <span class="lbl">{{mvcAction.actionDisplayName}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>

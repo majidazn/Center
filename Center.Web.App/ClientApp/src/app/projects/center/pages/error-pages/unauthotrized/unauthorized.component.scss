@@ -1,0 +1,46 @@
+body{
+    background:white !important; 
+    // .main {
+    //   background-image: none;
+    // }
+  }
+  
+  .containerImg {
+      position: relative;
+      width:61%;
+    }
+    
+    .containerImg img {
+      width: 101%;
+      height: auto;
+    }
+    
+     .btn {
+      position: absolute;
+      left: 49.3%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      background-color: #FF7A01;
+      color: white;
+      font-size: 16px;
+      padding: 12px 24px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+      a {
+          color: white;
+          text-decoration: none;
+      }
+    }
+    
+     .btn:hover {
+      text-decoration: none;
+    }
+  
+      p{
+font-size: 20px;
+color: #FF7A01;
+font-family: iranSans;
+font-weight: bold;
+    }

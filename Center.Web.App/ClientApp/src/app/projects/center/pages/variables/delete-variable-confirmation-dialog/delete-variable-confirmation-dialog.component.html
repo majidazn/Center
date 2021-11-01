@@ -1,0 +1,11 @@
+<app-custom-dialog title="{{title}}">
+
+  <p>
+    آیا از حذف این رکورد اطمینان دارید؟
+  </p>
+  <div class="float-left">
+    <button kendoButton [primary]="true" type="button" class="btn-modal save k-button" (click)="deleteRecord()"> بله </button>
+    <button kendoButton [primary]="true" type="button" class="btn-modal cancel k-button" (click)="closeDialog()"> خیر </button>
+    </div>
+
+</app-custom-dialog>

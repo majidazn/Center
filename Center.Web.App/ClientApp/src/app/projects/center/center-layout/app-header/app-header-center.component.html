@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg  fixed-top rtl" role="navigation">
+  <div class="container-fluid" style="padding-right: 0;">
+
+    <div class="HomeS">
+      <span id="menu-toggle" (click)="toggleMenu()"> <img src="../../../../../assets/Images/Icons/MenuIcon_B.png" style="margin-bottom: 8px;" /></span>
+      <a class="homeButton" [routerLink]="['/']" title="بازگشت به صفحه اصلی">
+        <span class="fa fa-home"></span>
+      </a>
+      <a class="navbar-brand HiddenImg" href="http://www.epd.ir" target="_blank" style="display: inline;">
+        <img src="../../../../../assets/Images/Icons/logo.png" class="img-responsive HiddenImg" />
+      </a>
+    </div>
+
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar"></button>
+
+    <a class="system-name">مراکز</a>
+
+    <ul class="nav navbar-nav flex-row justify-content-between ml-auto userInfo">
+      <li class="dropdown">
+        <span>{{UserNameTitle}}</span>
+      </li>
+    </ul>
+    <div class="moreInfoIcon">
+      <div ngbDropdown class="d-inline-block">
+        <a title="اطلاعات برنامه" id="dropdownBasic1" ngbDropdownToggle>
+          <svg xmlns="http://www.w3.org/2000/svg" width="26.216" height="26.216" viewBox="0 0 26.216 26.216">
+            <g id="Group_3647" data-name="Group 3647" transform="translate(-112.704 -18.704)">
+              <path id="Path_7489" data-name="Path 7489" d="M13.108,0A13.108,13.108,0,1,0,26.216,13.108,13.108,13.108,0,0,0,13.108,0Zm2.729,20.315q-1.012.4-1.615.608a4.26,4.26,0,0,1-1.4.21,2.791,2.791,0,0,1-1.905-.6,1.93,1.93,0,0,1-.678-1.517,5.51,5.51,0,0,1,.05-.731c.034-.249.089-.528.163-.842l.844-2.983c.074-.286.139-.558.19-.811a3.6,3.6,0,0,0,.075-.7,1.082,1.082,0,0,0-.235-.8,1.336,1.336,0,0,0-.9-.223,2.368,2.368,0,0,0-.671.1c-.227.07-.425.133-.587.2l.223-.919q.829-.338,1.587-.578a4.688,4.688,0,0,1,1.431-.242,2.739,2.739,0,0,1,1.878.588,1.954,1.954,0,0,1,.659,1.527q0,.195-.045.685a4.582,4.582,0,0,1-.169.9l-.84,2.974c-.069.239-.13.512-.185.817a4.319,4.319,0,0,0-.081.695,1,1,0,0,0,.265.808,1.485,1.485,0,0,0,.918.215,2.662,2.662,0,0,0,.695-.108,3.95,3.95,0,0,0,.562-.189ZM15.688,8.244a2,2,0,0,1-1.415.546,2.026,2.026,0,0,1-1.42-.546,1.743,1.743,0,0,1-.591-1.324,1.761,1.761,0,0,1,.591-1.327,2.011,2.011,0,0,1,1.42-.552,1.989,1.989,0,0,1,1.415.552,1.788,1.788,0,0,1,0,2.651Z" transform="translate(112.704 18.704)" fill="#45496b" />
+            </g>
+          </svg>
+        </a>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="user-dropdown">
+          <p class="pb-1 mb-2 mt-1 text-left pl-2">
+            ورژن برنامه:
+            <span class="ml-3">
+              G5 V3
+            </span>
+          </p>
+          <div class="pb-1 mb-2 mt-1 text-left pl-2">© تمامی حقوق این برنامه محفوظ و در اختیار  <a href="https://www.epd.ir" target="_blank">شرکت اطلاع رسانی پیوند داده ها</a> می باشد.</div>
+
+        </div>
+      </div>
+    </div>
+    <a class="logout-icon" [href]="HomeUrl" title="خروج">
+      <img src="../../../../../assets/Images/Icons/Exit.png" />
+    </a>
+
+  </div>
+</nav>
+
+
+

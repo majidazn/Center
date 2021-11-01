@@ -1,0 +1,12 @@
+
+/*# sourceMappingURL=add-activity-to-center.component.css.map */
+
+.mat-form-field-suffix {
+  background-color: transparent !important;
+}
+.colorBlue .mat-date.mat-form-field, .colorBlue .form-control, .colorBlue .k-textarea, .colorBlue .k-dropdown-wrap:focus {
+  border: 1px solid #8ecccd !important;
+}
+.colorBlue .mat-form-field-suffix .mat-datepicker-toggle-default-icon {
+  color: #8ecccd !important;
+}

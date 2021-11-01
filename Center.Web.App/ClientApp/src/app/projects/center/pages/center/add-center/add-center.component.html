@@ -1,0 +1,208 @@
+<div class="modal-content">
+  <div class="modal-header" cdkDragHandle cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    {{dataItem.title}}
+    <button [mat-dialog-close]="true" class="close" aria-label="Close" type="button"><span class="ng-tns-c11-3" aria-hidden="true">×</span></button>
+
+  </div>
+  <div class="modal-body">
+    <div class="card">
+      <form class="k-form" [formGroup]="angForm" (submit)="saveCenter()">
+        <div class="row margin-0">
+          <div class="col-lg-4 col-md-6 standard-padding">
+            <input formControlName="centerId" id="centerId" hidden="hidden" />
+            <kendo-combobox [data]="dataItem.centerGrouplistItems"
+                            [textField]="'name'"
+                            [valueField]="'centerVariableId'"
+                            [filterable]="true"
+                            formControlName="centerGroup"
+                            id="centerGroup"
+                            [value]="selectedCenterGroup"
+                            (valueChange)="dropDownValueChangecenterGroup($event)"
+                            [placeholder]="'گروه مرکز'"
+                            title="گروه مرکز"
+                            class="form-control">
+            </kendo-combobox>
+            <app-control-messages [_control]="angForm.controls.centerGroup"></app-control-messages>
+          </div>
+          <div class="col-lg-4 col-md-6 standard-padding">
+            <kendo-combobox [data]="dataItem.centerTitlelistItems"
+                            [textField]="'name'"
+                            [valueField]="'centerVariableId'"
+                            [filterable]="true"
+                            formControlName="title"
+                            id="title"
+                            [value]="selectedTitle"
+                            (valueChange)="dropDownValueChangecenterTitle($event)"
+                            [placeholder]="'ماهیت مرکز'"
+                            title="ماهیت مرکز"
+                            class="form-control">
+            </kendo-combobox>
+            <app-control-messages [_control]="angForm.controls.title"></app-control-messages>
+          </div>
+          <div class="col-lg-4 col-md-4 standard-padding">
+            <input class="k-textbox form-control" placeholder="مرکز" title="مرکز" formControlName="name" id="name" />
+            <app-control-messages [_control]="angForm.controls.name"></app-control-messages>
+          </div>
+          <div class="col-lg-4 col-md-4 standard-padding">
+            <input class="k-textbox form-control" placeholder="عنوان انگلیسی" title="عنوان انگلیسی" formControlName="enName" id="enName" />
+            <app-control-messages [_control]="angForm.controls.enName"></app-control-messages>
+          </div>
+          <div class="col-lg-2 col-md-2 standard-padding">
+            <kendo-numerictextbox placeholder="کد مرکز"
+                                  title="کد مرکز"
+                                  formControlName="centerCode"
+                                  id="centerCode"
+                                  [spinners]="false"
+                                  [format]="numberTextBoxFormat"
+                                  class="form-control">
+            </kendo-numerictextbox>
+            <app-control-messages [_control]="angForm.controls.centerCode"></app-control-messages>
+          </div>
+
+          <div class="col-lg-2 col-md-2 standard-padding">
+            <input class="k-textbox form-control" placeholder="شناسه ملی مرکز" title="شناسه ملی مرکز" formControlName="nationalCode" id="nationalCode" />
+            <app-control-messages [_control]="angForm.controls.nationalCode"></app-control-messages>
+          </div>
+
+          <div class="col-lg-4 col-md-4 standard-padding">
+            <input class="k-textbox form-control" placeholder="کد اقتصادی مرکز" title="کد اقتصادی مرکز" formControlName="financialCode" id="financialCode" />
+            <app-control-messages [_control]="angForm.controls.financialCode"></app-control-messages>
+          </div>
+
+          <div class="col-lg-4 col-md-4 standard-padding">
+            <div class="selectCityBox">
+              <kendo-combobox [data]="dataItem.citylistItems"
+                              [textField]="'text'"
+                              [valueField]="'value'"
+                              [filterable]="true"
+                              formControlName="city"
+                              [value]="selectedCity"
+                              id="city"
+                              (valueChange)="dropDownValueChangeCity($event)"
+                              (filterChange)="handleFilter($event)"
+                              [placeholder]="'شهر'"
+                              [valuePrimitive]="true"
+                              title="شهر"
+                              class="form-control">
+              </kendo-combobox>
+              <app-control-messages [_control]="angForm.controls.city"></app-control-messages>
+              <a (click)="selectCityByState()"><i class="icofont icofont-paper-plane cityIcon" title="انتخاب شهر"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12 standard-padding">
+            <input class="k-textbox form-control" placeholder="آدرس مرکز(URL)" title="آدرس مرکز(URL)" formControlName="hostName" id="hostName" />
+            <app-control-messages [_control]="angForm.controls.hostName"></app-control-messages>
+          </div>
+          <div class="col-lg-4 col-md-4 standard-padding">
+            <input placeholder="کدپستی" title="کدپستی"
+                   formControlName="zipCode"
+                   id="zipCode"
+                   type="text"
+                   class="form-control" />
+            <app-control-messages [_control]="angForm.controls.zipCode"></app-control-messages>
+          </div>
+
+          <div class="col-lg-8 standard-padding">
+            <textarea class="form-control-textarea add-center-textarea" placeholder="آدرس" title="آدرس" formControlName="address" id="address" rows="2"></textarea>
+            <app-control-messages [_control]="angForm.controls.address"></app-control-messages>
+          </div>
+          <div class="col-lg-4 standard-padding">
+            <ngfFormData [files]="files"
+                         postName="file"
+                         [(FormData)]="sendableFormData"></ngfFormData>
+
+            <ngfUploadStatus [(percent)]="progress"
+                             [httpEvent]="httpEvent"></ngfUploadStatus>
+
+    
+            <input ngfSelect
+                   #fileUploader
+                   id="fileUploader"
+                   type="file"
+                   [(files)]="logoImage"
+                   [accept]="accept"
+                   [maxSize]="maxSize"
+                   style="opacity:0"
+                   [(lastInvalids)]="lastInvalids"
+                   (filesChange)="imageLogoChanged($event)" />
+            <img src="../../../../../assets/Images/addLogo.png" title="افزودن لوگو" (click)="fileUploader.click()" />
+            <img *ngIf="logoImageBase64" src="../../../../../assets/Images/deleteLogo.png" (click)="removeLogoImage()" title="حذف لوگو" class="cursor-pointer" />
+            <img *ngIf="logoImageBase64" [src]="logoImageBase64WithDataImage" class="preview-logo" style="margin-right:5px;width:220px; max-height:100px;" />
+          </div>
+        </div>
+        <br />
+        <div class="row margin-0">
+          <div class="col-lg-7 col-md-12 col-sm-12 standard-padding headColor">
+            <kendo-grid [data]="telecomlist"
+                        [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+                        [sortable]="true"
+                        [pageable]="true"
+                        [reorderable]="true"
+                        (dataStateChange)="dataStateChange($event)"
+                        class="addPhoneNumber-grid borderTop-pane">
+
+              <ng-template kendoGridToolbarTemplate let-dataItem>
+                <a (click)="onAddNewTelecomClicked()" class="grid-header-icon f_S_16" title="افزودن شماره تماس"><i class="fa fa-plus-circle fastyle"></i>افزودن شماره تماس</a>
+              </ng-template>
+              <kendo-grid-column field="type" title="" [hidden]="true"></kendo-grid-column>
+              <kendo-grid-column field="typestr" title="نوع شماره"></kendo-grid-column>
+              <kendo-grid-column field="tellNo" title="شماره تلفن"></kendo-grid-column>
+              <kendo-grid-column field="section" title="داخلی"></kendo-grid-column>
+              <kendo-grid-column field="comment" title="توضیحات"></kendo-grid-column>
+              <kendo-grid-column title="">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                  <a (click)="onEditTelecom(rowIndex)">
+                    <i class="fa fa-pencil icofont icofont-ui-edit btn-grid" aria-hidden="true" title="ویرایش"></i>
+                  </a>
+                  <a (click)="onDeleteTelecom(rowIndex)">
+                    <i class="fa fa-trash icofont icofont-bin btn-grid" aria-hidden="true" title="حذف"></i>
+                  </a>
+                </ng-template>
+              </kendo-grid-column>
+            </kendo-grid>
+          </div>
+          <div class="col-lg-5 col-md-12 col-sm-12 standard-padding headColor">
+
+            <kendo-grid [data]="eAddressList"
+                        [pageSize]="EAddressgridState.take" [skip]="EAddressgridState.skip" [sort]="EAddressgridState.sort"
+                        [sortable]="true"
+                        [pageable]="true"
+                        [reorderable]="true"
+                        (dataStateChange)="eAddressdataStateChange($event)"
+                        class="borderTop-pane">
+
+              <ng-template kendoGridToolbarTemplate let-dataItem>
+                <a (click)="onAddNewEaddressClicked()" class="grid-header-icon f_S_16" title="افزودن رسانه"> <i class="fa fa-plus-circle fastyle"></i> افزودن رسانه</a>
+              </ng-template>
+              <kendo-grid-column field="eType" [hidden]="true" title=""></kendo-grid-column>
+              <kendo-grid-column field="eTypeStr" title="نوع رسانه"></kendo-grid-column>
+              <kendo-grid-column field="eAddress" title="آدرس"></kendo-grid-column>
+              <kendo-grid-column title="" width="120">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                  <a (click)="onEditEaddress(rowIndex)">
+                    <i class="fa fa-pencil icofont icofont-ui-edit btn-grid" aria-hidden="true" title="ویرایش"></i>
+                  </a>
+                  <a (click)="onDeleteEaddress(rowIndex)">
+                    <i class="fa fa-trash icofont icofont-bin btn-grid" aria-hidden="true" title="حذف"></i>
+                  </a>
+                </ng-template>
+              </kendo-grid-column>
+            </kendo-grid>
+          </div>
+          <div class="col-md-12 standard-padding margin-top-15 text-left">
+            <span *ngIf="angForm.value.centerId===0">
+              <button kendoButton [primary]="true" type="submit" [disabled]="!angForm.valid" class="btn-modal save"> <i class="fa fa-save margin_L"></i> ذخیره </button>
+            </span>
+            <span *ngIf="angForm.value.centerId!==0">
+              <button kendoButton [primary]="true" type="submit" [disabled]="!angForm.valid" class="btn-modal save"> <i class="fa fa-save margin_L"></i> ذخیره </button>
+            </span>
+            <!--  [disabled]="!angForm.valid" -->
+            <button kendoButton [primary]="true" type="button" (click)="closeDialog()" class="btn-modal cancel"> <i class="fa fa-close margin_L"></i>  انصراف </button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+
+<div class="scroll-style" id="sidebar-wrapper">
+
+  <div class="list-group border-0 card text-md-right" id="sidebar">
+  
+    <a [routerLink]="['/center']" class="list-group-item item-level1" [hasPermission]="[Permissions.SearchCenter] | addFullAccessUsers">
+      <div class="healthcare positionIcon" title="تعریف مرکز"></div>
+      <span class="d-md-inline">تعریف مرکز</span>
+    </a>
+
+    <a [routerLink]="['application']" class="list-group-item item-level1" [hasPermission]="[Permissions.GetCenterVariables] | addFullAccessUsers">
+      <div class="positionIcon Definition" title=" تعریف برنامه"></div>
+      <span class="d-md-inline"> تعریف برنامه </span>
+    </a>
+
+    <a [routerLink]="['variables']" class="list-group-item item-level1 active-link" [hasPermission]="[Permissions.SearchCenterVariable,Permissions.GetCenterVariables] | addFullAccessUsers">
+      <div class="positionIcon varibale" title="مدیریت متغیرهای پایه "></div>
+      <span class="d-md-inline"> مدیریت متغیرهای پایه  </span>
+    </a>
+
+    <a  [routerLink]="['rolemanager']" class="list-group-item item-level1"  [hasPermission]="[Permissions.UpdateAccess] | addFullAccessUsers">
+      <div class="Security positionIcon"  title="امنیت"></div>
+      <span class="d-md-inline"> امنیت </span>
+    </a>
+
+  </div>
+
+</div>
+
+
+
+

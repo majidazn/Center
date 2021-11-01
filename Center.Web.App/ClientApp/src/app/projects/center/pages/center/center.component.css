@@ -1,0 +1,23 @@
+.projectgroup {
+  padding: 3px 11px !important;
+  background: #47c874;
+  border-radius: 39px;
+  margin: 0 2px;
+}
+.singleprojectw {
+  padding: 3px 11px !important;
+  background: #47c874;
+  border-radius: 39px;
+  margin: 0 2px;
+}
+.k-grid-table .icofont.icofont-bin {
+  padding: 5px 15px !important;
+}
+
+.k-grid-table .icofont.icofont-ui-edit {
+
+  padding: 5px 15px !important;
+}
+.colorBlue .k-window .card, .colorBlue .modal-body .card {
+  border: none;
+}

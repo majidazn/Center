@@ -1,0 +1,81 @@
+<div class="container-fluid">
+
+  <div class="search-box borderTop-pane">
+    <form class="k-form no-padding" [formGroup]="addActivityForm" (submit)="assignActivity()">
+      <div class="row margin-0">
+        <div class="col-xl-2 col-lg-12 col-md-12 col-sm-12 standard-padding">
+          <div *ngIf="centerModel!=undefined" class="center-name">
+            <div> نام مرکز:   {{centerModel.name}}</div>  <br />
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 standard-padding">
+          <kendo-combobox [data]="activityGroups"
+                          [loading]="activityGroups==null"
+                          [textField]="'name'"
+                          [valueField]="'centerVariableId'"
+                          [filterable]="true"
+                          id="activityGroup"
+                          formControlName="activityGroup"
+                          [valuePrimitive]="true"
+                          (valueChange)="dropDownValueChangeActivityGroup($event)"
+                          [placeholder]="'گروه اصلی برنامه ها'"
+                          title="گروه اصلی برنامه ها"
+                          class="form-control">
+          </kendo-combobox>
+          <app-control-messages [_control]="addActivityForm.controls.activityGroup"></app-control-messages>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 standard-padding matInput-container">
+          <label class="lableI">تاریخ شروع</label>
+          <mat-form-field class="form-control mat-date">
+            <input matInput [matDatepicker]="StartDate" readonly formControlName="StartDate" title="تاریخ شروع">
+            <mat-datepicker-toggle matSuffix [for]="StartDate"></mat-datepicker-toggle>
+            <mat-datepicker #StartDate></mat-datepicker>
+          </mat-form-field>
+          <app-control-messages [_control]="addActivityForm.controls.StartDate"></app-control-messages>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 standard-padding matInput-container">
+          <label class="lableI">تاریخ پایان</label>
+          <mat-form-field class="form-control mat-date">
+            <input matInput [matDatepicker]="EndDate" readonly formControlName="EndDate" [matDatepickerFilter]="dateFilter" title="تاریخ پایان">
+            <span class="clearDate-btn" (click)="clearEndDate()" *ngIf="addActivityForm.value.EndDate!=''">×</span>
+            <mat-datepicker-toggle matSuffix [for]="EndDate"></mat-datepicker-toggle>
+            <mat-datepicker #EndDate></mat-datepicker>
+          </mat-form-field>
+          <app-control-messages2 [_control]="addActivityForm.controls.EndDate"></app-control-messages2>
+        </div>
+      </div>
+
+      <!--ribbon-top-->
+      <div class="ribbon-section">
+        <div class="container-fluid">
+          <button kendoButton [primary]="true" type="submit" class="btn btn-main btn-save ribbon-button" title="ثبت" [hasPermission]="[Permissions.CreateActivity] | addFullAccessUsers">
+            <img src="../assets/Images/Icons/save-file-option.png" />
+          </button>
+          <button kendoButton [primary]="true" type="button" (click)="redirectToCenterPage()" class="btn btn-main btn-save ribbon-button" title="بازگشت به تعریف مرکز">
+            <img src="../assets/Images/Icons/return-to-centerw.png" />
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row margin-top-10 margin-0 headColor">
+    <kendo-grid [data]="activityList"
+                [pageSize]="gridStateCenterActivity.take" [skip]="gridStateCenterActivity.skip" [sort]="gridStateCenterActivity.sort"
+                [selectable]="selectableSettings"
+                [reorderable]="true"
+                [loading]="isLoading"
+                kendoGridSelectBy="centerVariableId"
+                (selectionChange)="changeSelection($event)"
+                [selectedKeys]="selectedActivities"
+                class="borderTop-pane">
+      <kendo-grid-checkbox-column [width]="50" field="isAssined">
+        <ng-template kendoGridCellTemplate let-idx="rowIndex" let-dataItem>
+            <input type="checkbox" [kendoGridSelectionCheckbox]="idx" [disabled]="dataItem.isAssined" />
+        </ng-template>
+      </kendo-grid-checkbox-column>
+      <kendo-grid-column field="centerVariableId" [hidden]="true"></kendo-grid-column>
+      <kendo-grid-column field="centerVariableName" title="گروه اصلی برنامه ها"></kendo-grid-column>
+    </kendo-grid>
+  </div>
+</div>

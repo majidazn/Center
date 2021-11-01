@@ -1,0 +1,11 @@
+<!--<div *ngIf="checkIfControlHasError() == true" [ngClass]="{'danger': checkIfControlHasError() }">{{getErrorMessage()}}</div>-->
+
+
+<!--<mat-error *ngIf="emailFormControl.hasError('required')">
+  Email is <strong>required</strong>
+</mat-error>-->
+
+
+<mat-error *ngIf="checkIfControlHasError() == true">
+  {{getErrorMessage()}}
+</mat-error>

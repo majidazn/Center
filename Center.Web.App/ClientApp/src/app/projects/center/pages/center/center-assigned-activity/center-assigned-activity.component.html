@@ -1,0 +1,16 @@
+<h6>  برنامه های فعال این مرکز :</h6>
+<kendo-grid [data]="centerActivityList">
+  <kendo-grid-column field="id" title="شهر" [hidden]="true"></kendo-grid-column>
+  <kendo-grid-column field="centerVariableName" title="برنامه"></kendo-grid-column>
+  <kendo-grid-column field="validFrom" title="تاریخ شروع"></kendo-grid-column>
+  <kendo-grid-column field="validTo" title="تاریخ پایان"></kendo-grid-column>
+
+  <kendo-grid-column title="" width="100">
+    <ng-template kendoGridCellTemplate let-dataItem>
+
+      <a (click)="deleteActivity(dataItem.id)" title="حذف">
+        <i class="fa fa-trash icofont icofont-bin btn-grid" aria-hidden="true"></i>
+      </a>
+    </ng-template>
+  </kendo-grid-column>
+</kendo-grid>

@@ -1,0 +1,12 @@
+  insert into [EPD_Center_DB].[Center].[CenterVariables]
+  values(1,N'Root','Root',1,0,0,0,'','','','','',2)
+
+  insert into [EPD_Center_DB].[Center].[CenterVariables]
+  values(10,N'گروه اصلی برنامه ها','Main Group Application',1,0,0,0,'','','','','',0)
+
+
+    insert into [EPD_Center_DB].[Center].[CenterVariables]
+  values(20,N'گروه مرکز','Center Group',1,0,0,0,'','','','','',0)
+
+      insert into [EPD_Center_DB].[Center].[CenterVariables]
+  values(22,N'ماهیت مرکز','Center Title',1,0,0,0,'','','','','',0)

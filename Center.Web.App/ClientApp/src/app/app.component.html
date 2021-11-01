@@ -1,0 +1,13 @@
+
+<router-outlet>  </router-outlet>
+
+<div class="my-container">
+  <ng-template #customLoadingTemplate>
+    <div class="custom-class">
+    </div>
+  </ng-template>
+
+  <ngx-loading [show]="eventRouting != currentUrl" [config]="{backdropBackgroundColour: 'rgba(0,0,0,0.5)', backdropBorderRadius: '10px',
+        primaryColour: '#00000', secondaryColour: '#00000', tertiaryColour: '#00000' }" [template]="customLoadingTemplate"></ngx-loading>
+</div>
+

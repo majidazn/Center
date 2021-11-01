@@ -1,0 +1,52 @@
+<div class="modal-content">
+  <div cdkDragHandle cdkDrag cdkDragRootElement=".cdk-overlay-pane" class="modal-header">
+    {{dataItem.title}}
+    <button (click)="close()" class="close" aria-label="Close" type="button"><span class="ng-tns-c11-3" aria-hidden="true">×</span></button>
+
+  </div>
+  <div class="modal-body">
+    <div class="row margin-0">
+
+      <div class="col-xs-12 col-sm-12">
+        <kendo-combobox [placeholder]="'انتخاب استان'"
+                        [data]="stateListItem"
+                         [loading]="stateListItem==null"
+                        [value]="selectedState"
+                        [textField]="'text'"
+                        [valueField]="'value'"
+                        [filterable]="true"
+                        (filterChange)="handleFilterState($event)"
+                        (valueChange)="handleStateChange($event)"
+                         [valuePrimitive]="true"
+                        title="انتخاب استان"
+                        class="form-control">
+        </kendo-combobox>
+      </div>
+
+      <div class="col-xs-12 col-sm-12">
+
+        <kendo-combobox [data]="cityListItem"
+                        [loading]="cityListItemLoading"
+                        [textField]="'text'"
+                        [valueField]="'value'"
+                        [filterable]="true"
+                        [value]="selectedCity"
+                        (valueChange)="handleCityChange($event)"
+                        (filterChange)="handleCityFilter($event)"
+                        [placeholder]="'شهر'"
+                        [valuePrimitive]="true"
+                        title="شهر"
+                        class="form-control">
+        </kendo-combobox>
+
+      </div>
+
+      <div class="col-xs-12 col-sm-12 margin-top-10">
+
+        <button kendoButton (click)="selectThisCity()" [primary]="true" class="btn-modal save"><span class="fa fa-save"></span>انتخاب</button>
+        <button kendoButton  (click)="close()" class="btn-modal cancel">انصراف</button>
+
+      </div>
+    </div>
+  </div>
+</div>

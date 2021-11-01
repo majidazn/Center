@@ -1,0 +1,129 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 standard-padding">
+      <form class="k-form no-padding" [formGroup]="searchForm" (submit)="searchCenter()" (enter)="searchCenter()">
+
+        <!--ribbon-top-->
+        <div class="ribbon-section">
+          <div class="container-fluid">
+            <button kendoButton [primary]="true" type="submit" class="btn btn-main btn-save ribbon-button" title="جستجو">
+              <img src="../../../../../assets/Images/Icons/magnifier.png" />
+            </button>
+            <a (click)="ClearFields()" class="btn btn-main btn-reset ribbon-button" title="خالی کردن">
+              <img src="../../../../../assets/Images/Icons/refresh.png" />
+            </a>
+          </div>
+        </div>
+        <div class="row margin-0 search-box borderTop-pane">
+          <div class="col-lg-3 col-md-6 col-md-6 col-sm-6 standard-padding">
+            <input class="k-textbox form-control" placeholder="مرکز" title="مرکز" formControlName="centerName" id="centerName" />
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 standard-padding">
+            <div class="selectCityBox">
+              <kendo-combobox [data]="citylistItems"
+                              [loading]="citylistItems==null"
+                              [textField]="'text'"
+                              [valueField]="'value'"
+                              [filterable]="true"
+                              formControlName="city"
+                              [value]="selectedCity"
+                              id="city"
+                              (filterChange)="cityList_handleFilter($event)"
+                              (valueChange)="onChangeCity($event)"
+                              [placeholder]="'شهر'"
+                              [valuePrimitive]="true"
+                              title="شهر"
+                              class="form-control">
+              </kendo-combobox>
+              <a (click)="selectCityByState()"><i class="icofont icofont-paper-plane cityIcon" title="انتخاب شهر"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 standard-padding">
+            <kendo-combobox [data]="centerGroupData"
+                            [textField]="'name'"
+                            [valueField]="'centerVariableId'"
+                            [filterable]="true"
+                            [loading]="centerGroupData==null"
+                            formControlName="centerGroup"
+                            id="centerGroup"
+                            [valuePrimitive]="true"
+                            (filterChange)="handleFilterCenterGroup($event)"
+                            (valueChange)="dropDownValueChangecenterGroup($event)"
+                            [placeholder]="'گروه مرکز'"
+                            title="گروه مرکز"
+                            class="form-control">
+
+            </kendo-combobox>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 standard-padding">
+            <kendo-combobox [data]="centerTitleData"
+                            [loading]="centerTitleData==null"
+                            [textField]="'name'"
+                            [valueField]="'centerVariableId'"
+                            [filterable]="true"
+                            formControlName="title"
+                            id="title"
+                            [valuePrimitive]="true"
+                            (filterChange)="handleFilterTitle($event)"
+                            (valueChange)="dropDownValueChangecenterTitle($event)"
+                            [placeholder]="'ماهیت مرکز'"
+                            title="ماهیت مرکز"
+                            class="form-control">
+            </kendo-combobox>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="headColor">
+        <kendo-grid [data]="centerList"
+                    [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
+                    class="margin-top-5 borderTop-pane"
+                    [sortable]="true"
+                    [pageable]="true"
+                    [reorderable]="true"
+                    [loading]="isLoading"
+                    (dataStateChange)="dataStateChange($event)">
+
+
+          <ng-template kendoGridToolbarTemplate let-dataItem>
+            <a (click)="onAddNewClicked()" class="icofont icofont-plus-circle grid-header-icon" title="افزودن مرکز"  [hasPermission]="[Permissions.AddCenter] | addFullAccessUsers"> <i class="fa fa-plus-circle fastyle"></i>  افزودن مرکز </a>
+          </ng-template>
+          <kendo-grid-column field="name" title="مرکز"></kendo-grid-column>
+          <kendo-grid-column field="centerGroupString" title="گروه مرکز"></kendo-grid-column>
+          <kendo-grid-column field="cityString" title="شهر"></kendo-grid-column>
+          <kendo-grid-column field="stateString" title="استان"></kendo-grid-column>
+          <kendo-grid-column field="titleString" title="ماهیت"></kendo-grid-column>
+
+          <kendo-grid-column title="" width="200">
+            <ng-template kendoGridCellTemplate let-dataItem>
+
+              <a (click)="onEditCenter(dataItem.centerId)" title="ویرایش"  [hasPermission]="[Permissions.EditCenter] | addFullAccessUsers">
+                <i class="fa fa-pencil icofont icofont-ui-edit btn-grid" aria-hidden="true"></i>
+              </a>
+              <a (click)="onDeleteCenter(dataItem.centerId)" title="حذف"  [hasPermission]="[Permissions.RemoveCenter] | addFullAccessUsers">
+                <i class="fa fa-trash icofont icofont-bin btn-grid" aria-hidden="true"></i>
+              </a>
+              <a [routerLink]="['/center/activity',dataItem.centerId]" title="تخصیص برنامه به مرکز" class="btn-grid singleprojectw"  [hasPermission]="[Permissions.GetActivitiesByCenterId] | addFullAccessUsers">
+                <img src="../assets/Images/Icons/single-projectw.png" aria-hidden="true" style="height: 22px;" />
+              </a>
+
+              <a *ngIf="especialSubGroupData && checkIfServiceIsMovedAsSubEGroup(dataItem.ServiceId)"
+                 class="btn btn-save" (click)="setAsEspecialSubGroup(dataItem.ServiceId)"> <i class="fa fa-arrow-left" aria-hidden="true"></i>  </a>
+
+            </ng-template>
+          </kendo-grid-column>
+
+          <div *kendoGridDetailTemplate="let dataItem" [hasPermission]="[Permissions.GetActivitiesByCenterId] | addFullAccessUsers">
+            <app-center-assigned-activity [centerId]="dataItem.centerId" [parentInstance]="this"></app-center-assigned-activity>
+          </div>
+
+          <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
+            <app-kendo-grid-pagination></app-kendo-grid-pagination>
+          </ng-template>
+        </kendo-grid>
+      </div>
+    </div>
+  </div>
+</div>
